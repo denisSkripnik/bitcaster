@@ -1,0 +1,126 @@
+doctype html
+html(lang=lang)
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='#{subject}')
+    meta(name='author', content='')
+    title= title
+    link(href='/bootstrap/css/landing-page.css', rel='stylesheet')
+    link(href='/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+
+  body
+    nav.navbar.navbar-default.navbar-fixed-top.topnav(role='navigation')
+      .container.topnav
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand.topnav(href='#') Go Top
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='#services') About
+            li
+              a(href='?ln=en') En
+            li
+              a(href='?ln=ru') Ru
+        // /.navbar-collapse
+      // /.container
+    // Header
+    a(name='up')
+    .intro-header
+      .container
+        .row
+          .col-lg-12
+            .intro-message
+              h1 BITCASTER.ME
+              h3=subject
+              h3 Launching  1 Feb 2018
+              hr.intro-divider
+              ul.list-inline.intro-social-buttons
+                li
+                  a.btn.btn-default.btn-lg(href='https://twitter.com/SBootstrap')
+                    i.fa.fa-twitter.fa-fw
+                    span.network-name Twitter
+                li
+                  a.btn.btn-default.btn-lg(href='https://github.com/IronSummitMedia/startbootstrap')
+                    i.fa.fa-facebook.fa-fw
+                    span.network-name Facebook
+      // /.container
+    // /.intro-header
+    // Page Content
+    a(name='services')
+    .content-section-a
+      .container
+        .row
+          .col-lg-5.col-sm-6
+            hr.section-heading-spacer
+            .clearfix
+            h2.section-heading=agregator.head 
+                br
+                small=agregator.problem
+            p.lead=agregator.detail
+          .col-lg-5.col-lg-offset-2.col-sm-6
+            img.img-responsive.img-rounded(src='/images/agregator.png', alt='')
+      // /.container
+    // /.content-section-a
+    .content-section-b
+      .container
+        .row
+          .col-lg-5.col-lg-offset-1.col-sm-push-6.col-sm-6
+            hr.section-heading-spacer
+            .clearfix
+            h2.section-heading=forecaster.head
+              br
+              small=forecaster.problem
+            p.lead=forecaster.detail
+          .col-lg-5.col-sm-pull-6.col-sm-6
+            img.img-responsive(src='/images/forecaster.png', alt='')
+      // /.container
+    // /.content-section-b
+    .content-section-a
+      .container
+        .row
+          .col-lg-5.col-sm-6
+            hr.section-heading-spacer
+            .clearfix
+            h2.section-heading=recomendation.head
+              br
+              small=recomendation.problem
+            p.lead=recomendation.detail
+          .col-lg-5.col-lg-offset-2.col-sm-6
+            img.img-responsive(src='/images/advisory.png', alt='')
+      // /.container
+    // /.content-section-a
+    a(name='contact')
+    .banner
+      .container
+        .row
+          .col-lg-6
+            h2 Any Questions? Join Us:
+          .col-lg-6
+            ul.list-inline.banner-social-buttons
+              li
+                a.btn.btn-default.btn-lg(href='https://twitter.com/SBootstrap')
+                  i.fa.fa-twitter.fa-fw
+                  span.network-name Twitter
+              li
+                a.btn.btn-default.btn-lg(href='https://github.com/IronSummitMedia/startbootstrap')
+                  i.fa.fa-facebook.fa-fw
+                  span.network-name Facebook
+      // /.container
+    // /.banner
+    // Footer
+    footer
+      .container
+        .row
+          .col-lg-12
+            p.copyright.text-muted.small Copyright © Bitcaster Team 2017. All Rights Reserved
+    // jQuery
+    script(src='js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='js/bootstrap.min.js')
+    script(src='javascripts/timer.js')
