@@ -1,11 +1,12 @@
 
 var ru_page={
 			lang:'ru',
-			title:'Bitcaster Leading Page',
+			title:'Аналитика нового поколения. Уже скоро',
 			subject:'Ключевые индикаторы блокчейна в одном месте',
+			banner_text:'Вопросы? Следите за нами',
 			agregator:{head:'Агрегация и анализ',
 			           problem:'Слишком много блокчейн бирж! Где заключить выгодную сделку?',
-			           detail:'Цель - собрать и обработать индикаторы с 10-ти популярных  бирж. Вы получите наиболее оперативную информацию блокчейн бирж в удобном для сравнения виде'
+			           detail:'Цель - собрать и обработать индикаторы с 10-ти популярных  бирж. Вы получите наиболее оперативную информацию в удобном для сравнения виде'
 		              },
 			forecaster:{head:'Прогноз',
 			           problem:'Вы до сих пор гадаете на сомнительных индикаторах?',
@@ -13,17 +14,18 @@ var ru_page={
 		              },
 			recomendation:{head:'Оповещения',
 			           problem:'Не успеваете следить за рынком?',
-			           detail:'Веб приложение  выводит уведомления об изменениях индикаторов на устройстве клиента даже при закрытом браузере. Они имеют индивидуальные настройки и шанс превратится в умную рекомендационную систему. Как Вам идея?'
+			           detail:'Веб приложение  выводит уведомления об изменениях индикаторов на устройстве клиента даже при закрытом браузере. Оповещения имеют индивидуальные настройки и шанс превратится в умную рекомендационную систему. Как Вам идея?'
 		              }
 	};
 
 var en_page={
 	        lang:'en',
-			title:'Bitcaster Leading Page',
+			title:'Bitcaster',
 			subject:'The most impotant Blockchain indicators in one place',
+			banner_text:'Any Questions? Join Us',
 			agregator:{head:'Aggregation and analysis',
 			           problem:'Too many Blockchain exchanges! Where to make a good order?',
-			           detail:"The goal is to collect and process indicators from 10 popular exchanges. You'll get the up-to-date information from exchanges in adapted for comparison form."
+			           detail:"The goal is to collect and process indicators from 10 popular exchanges. You'll get the up-to-date information  in adapted for comparison form."
 		              },
 			forecaster:{head:'Forecast',
 			           problem:'Do you still believing in questionable indicators?',

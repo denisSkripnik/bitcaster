@@ -4,7 +4,7 @@ html(lang=lang)
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='description', content='#{subject}')
+    meta(name='description', content='#{title}')
     meta(name='author', content='')
     title= title
     link(href='/bootstrap/css/landing-page.css', rel='stylesheet')
@@ -42,11 +42,7 @@ html(lang=lang)
               hr.intro-divider
               ul.list-inline.intro-social-buttons
                 li
-                  a.btn.btn-default.btn-lg(href='https://twitter.com/SBootstrap')
-                    i.fa.fa-twitter.fa-fw
-                    span.network-name Twitter
-                li
-                  a.btn.btn-default.btn-lg(href='https://github.com/IronSummitMedia/startbootstrap')
+                  a.btn.btn-default.btn-lg(href='#')
                     i.fa.fa-facebook.fa-fw
                     span.network-name Facebook
       // /.container
@@ -100,15 +96,15 @@ html(lang=lang)
       .container
         .row
           .col-lg-6
-            h2 Any Questions? Join Us:
+            h2=banner_text
           .col-lg-6
             ul.list-inline.banner-social-buttons
               li
-                a.btn.btn-default.btn-lg(href='https://twitter.com/SBootstrap')
-                  i.fa.fa-twitter.fa-fw
-                  span.network-name Twitter
+                a.btn.btn-default.btn-lg(href='#')
+                  i.fa
+                  span.network-name E-Mail
               li
-                a.btn.btn-default.btn-lg(href='https://github.com/IronSummitMedia/startbootstrap')
+                a.btn.btn-default.btn-lg(href='#')
                   i.fa.fa-facebook.fa-fw
                   span.network-name Facebook
       // /.container
@@ -120,6 +116,6 @@ html(lang=lang)
           .col-lg-12
             p.copyright.text-muted.small Copyright © Bitcaster Team 2017. All Rights Reserved
     // jQuery
-    script(src='js/jquery.js')
+    script(src='/bootstrap/js/jquery.js')
     // Bootstrap Core JavaScript
-    script(src='js/bootstrap.min.js')
+    script(src='/bootstrap/js/bootstrap.min.js')

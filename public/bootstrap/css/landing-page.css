@@ -168,3 +168,9 @@ footer {
 p.copyright {
     margin: 15px 0 0;
 }
+
+.half-rule { 
+    margin-left: 0;
+    text-align: left;
+    width: 50%;
+ }
