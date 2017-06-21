@@ -20,11 +20,11 @@ var ru_page={
 
 var en_page={
 	        lang:'en',
-			title:'Bitcaster',
+			title:'The new generation analytics. Coming Soon',
 			subject:'The most impotant Blockchain indicators in one place',
 			banner_text:'Any Questions? Join Us',
 			agregator:{head:'Aggregation and analysis',
-			           problem:'Too many Blockchain exchanges! Where to make a good order?',
+			           problem:'Too many Blockchain markets! Where to make a good order?',
 			           detail:"The goal is to collect and process indicators from 10 popular exchanges. You'll get the up-to-date information  in adapted for comparison form."
 		              },
 			forecaster:{head:'Forecast',
