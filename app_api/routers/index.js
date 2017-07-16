@@ -26,3 +26,4 @@ router.post('/private/state/:exchange');
 router.post('/private/users/favorites',ctrlUsers.setFavorites);
 router.get('/private/users/favorites',ctrlUsers.getFavorites);
 router.delete('/private/users/favorites/:cointag',ctrlUsers.delFavorite);
+//Comment
