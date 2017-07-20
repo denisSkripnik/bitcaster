@@ -1,11 +1,17 @@
 var mongoose=require('mongoose');
 
-dbURI='mongodb://localhost/bitcaster'
+var dbURI='mongodb://localhost/bitcaster'
 if (process.env.NODE_ENV=='production'){
 	dbURI='mongodb://bitcaster_api:pyv!l53rf@ds151702.mlab.com:51702/heroku_lp017q5m'
 };
 
-mongoose.connect(dbURI);
+
+var connectOptions= {
+    useMongoClient: true
+   };
+var promise=mongoose.connect(dbURI,connectOptions);
+
+promise.then(()=>{console.log('connected');},err=>{throw err;});
 
 function gracefulShutdown(msg,callback) {
 	mongoose.connection.close(function(){console.log('Dissconnected '+msg);});
@@ -19,4 +25,3 @@ require('./coins');
 require('./users');
 require('./pairs');
 require('./topReport');
-require('./processingState');

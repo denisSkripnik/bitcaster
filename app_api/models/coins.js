@@ -1,4 +1,7 @@
+//Coins collection using in main form of app
+
 var mongoose=require('mongoose');
+var numSeq = require('mongoose-sequence');
 
 var exchangeListSchema=new mongoose.Schema({
 	name:{type:String,required:true},
@@ -20,4 +23,8 @@ var coinsListSchema=new mongoose.Schema({
     lastUpdate:{type:Date,'default':Date.now}
 });
 
-mongoose.model('coins',coinsListSchema,'coins');
+//Short num used in user favorite list, stored in JWT payload.
+coinsListSchema.plugin(numSeq,{inc_field:'short_num'});
+
+mongoose.model('Coins',coinsListSchema,'coins');
+
