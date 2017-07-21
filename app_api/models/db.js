@@ -5,6 +5,7 @@ if (process.env.NODE_ENV=='production'){
 	dbURI='mongodb://bitcaster_api:pyv!l53rf@ds151702.mlab.com:51702/heroku_lp017q5m'
 };
 
+mongoose.Promise = require('bluebird');
 
 var connectOptions= {
     useMongoClient: true

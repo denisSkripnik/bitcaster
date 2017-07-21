@@ -3,17 +3,13 @@
 var mongoose=require('mongoose');
 var numSeq = require('mongoose-sequence');
 
-var exchangeListSchema=new mongoose.Schema({
-	name:{type:String,required:true},
-	isActive:{type:Boolean,required:true}
-});
 
 var coinsListSchema=new mongoose.Schema({
 	name:{type:String,required:true},
-	tag:{type:String,required:true},
+	tag:{type:String,required:true,unique: true},
 	medianPrice:{type:Number},
     supply:{type:Number},
-    exchanges:[exchangeListSchema],
+    exchanges:[String],
     rating:{type:Number,required:true},
     percentPredict:{type:Number},
     tagImg:{type:String},
@@ -25,6 +21,7 @@ var coinsListSchema=new mongoose.Schema({
 
 //Short num used in user favorite list, stored in JWT payload.
 coinsListSchema.plugin(numSeq,{inc_field:'short_num'});
+coinsListSchema.index({numSeq:1},{unique: true});
 
 mongoose.model('Coins',coinsListSchema,'coins');
 
