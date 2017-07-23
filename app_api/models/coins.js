@@ -8,6 +8,7 @@ var coinsListSchema=new mongoose.Schema({
 	name:{type:String,required:true},
 	tag:{type:String,required:true,unique: true},
 	medianPrice:{type:Number},
+    prevPrice:{type:Number},
     supply:{type:Number},
     exchanges:[String],
     rating:{type:Number,required:true},

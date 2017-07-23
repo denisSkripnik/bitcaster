@@ -1,12 +1,13 @@
 var mongoose = require('mongoose');
 var Coin = mongoose.model('Coins');
+var Pair= mongoose.model('pairs');
 
 function sendJsonResponse(res,status,content) {
 	res.status(status);
 	res.json(content);
 }
 
-var safeUpdater=(function(){
+var dataFuncs=(function(){
     function updateObject(req,doc){
         var cnt=0;
         for (i in req.body) {
@@ -17,7 +18,9 @@ var safeUpdater=(function(){
                 cnt++;
             }
         }
-         if (cnt>0) { return doc;}
+         if (cnt>0) { doc.lastUpdate=Date.now(); 
+                      return doc;
+                    }
          else {return false;}
     }
     return {
@@ -40,9 +43,9 @@ function getActiveCoins(req,res){
         	}
             else {
             	//Raising raiting for user favorite coins.
-            	if (req.payload && req.payload.favorites>0){
+            	if (req.payload && req.payload.favoriteCoins>0){
                    coins.forEach(function(coin){
-                   	if (coin.short_num in req.payload.favorites){
+                   	if (coin.short_num in req.payload.favoriteCoins){
                    		coin.rating+=100
                    	}
                    })
@@ -53,8 +56,34 @@ function getActiveCoins(req,res){
 }
 
 function getPairs(req,res){
-	sendJsonResponse(res,200,{'message':'it is stub'});
+    //All possibly requests
+	var mongoReq=[{exchange:req.params.exchange,quoteCoin:req.params.cointag},
+                  {exchange:req.params.exchange},
+                  {baseCoin:req.params.cointag},
+                  {}
+             ];
+    var reqParam;
+        if(req.params.exchange!='all' && req.params.cointag!='all'){
+            reqParam=0;
+        }
+        else if(req.params.exchange!='all'){
+            reqParam=1;
+        }
+        else if(req.params.cointag!='all'){
+            reqParam=2;
+        }
+        else{reqParam=3};
+        promise=Pair.find(mongoReq[reqParam]).exec();
+        promise
+               .then(function(pairs){
+                if(!pairs) throw new Error('Coin not found');
+                else if(pairs.length==0)  throw new Error('Coin not found');
+                sendJsonResponse(res,200,pairs);
+               })
+               .catch(function(err){sendJsonResponse(res,400,{'message':err.message});});
 }
+   
+
 
 function getTopPairs(req,res){
 	sendJsonResponse(res,200,{'message':'it is stub'});
@@ -80,23 +109,31 @@ function setNewCoin(req,res){
 }
 
 function setNewPair(req,res){
-     sendJsonResponse(res,200,{'message':'it is stub'});
+    promise=Pair.create({
+        pair:req.body.pair,
+        quoteCoin:req.body.quoteCoin,
+        baseCoin:req.body.baseCoin,
+        exchange:req.body.exchange,
+        isForMedian:req.body.isForMedian
+    });
+    promise
+          .then(function(pair){
+            sendJsonResponse(res,200,pair);
+          })
+          .catch(function(err){
+            sendJsonResponse(res,400,err);
+          });
 
 }
 
 function updateCoins(req,res){
-    var counter=0;
-    if (!req.params.cointag){
-        sendJsonResponse(res,400,{'message':'coin tag name is required'});
-        return;
-    }
     var promise=Coin.findOne({tag:req.params.cointag}).exec();
     promise
           .then(function (coin) {
             if(!coin) {
                 throw new Error('Coin not found');
             } else {
-              coin=safeUpdater.updateObject(req,coin);
+              coin=dataFuncs.updateObject(req,coin);
               if (!coin) throw new Error('Nothing to update');
               return coin.save()
             }})
@@ -108,7 +145,7 @@ function updateCoins(req,res){
 }
 
 function updatePairs(req,res){
-	sendJsonResponse(res,200,{'message':'it is stub'});
+    var promise=Pair.findOne({exchange:req.params.exchange,pair:req.params.pair})    
 }
 
 function setTopReport(req,res){

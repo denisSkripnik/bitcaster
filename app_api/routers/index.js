@@ -8,7 +8,7 @@ var ctrlStates=require('../controllers/ctrlStates');
 
 //Public routers
 router.get('/public/coins',ctrlData.getActiveCoins);
-router.get('/public/pairs/:cointag',ctrlData.getPairs);
+router.get('/public/pairs/:exchange/:cointag',ctrlData.getPairs);
 router.get('/public/reports/top',ctrlData.getTopPairs);
 
 //Capcha protected routers
