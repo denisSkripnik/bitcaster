@@ -145,14 +145,29 @@ function updateCoins(req,res){
 }
 
 function updatePairs(req,res){
-    var promise=Pair.findOne({exchange:req.params.exchange,pair:req.params.pair})    
+    var promise=Pair.findOne({exchange:req.params.exchange,pair:req.params.pair});
+    promise
+           .then(function(pair){
+            if(!pair) throw new Error('Pair not found');
+            pair=dataFuncs.updateObject(req,pair);
+            if(!pair) throw new Error('Nothing to update');
+            return pair.save()
+           })
+           .then(function(pair){
+            sendJsonResponse(res,200,pair);
+           })
+           .catch(function(err){sendJsonResponse(res,400,{'message':err.message})});    
 }
 
 function setTopReport(req,res){
     sendJsonResponse(res,200,{'message':'it is stub'});
 }
+
 function delPair(req,res){
-	sendJsonResponse(res,200,{'message':'it is stub'});
+  var promise=Pair.deleteOne({exchange:req.params.exchange,pair:req.params.pair});
+  promise
+        .then(function(){sendJsonResponse(res,204,null);})
+        .catch(function(err){sendJsonResponse(res,400,err)});
 }
 
 module.exports.getActiveCoins=getActiveCoins;
