@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Coin = mongoose.model('Coins');
 var Pair= mongoose.model('pairs');
+var Report=mongoose.model('topReport');
 
 function sendJsonResponse(res,status,content) {
 	res.status(status);
@@ -145,7 +146,7 @@ function updateCoins(req,res){
 }
 
 function updatePairs(req,res){
-    var promise=Pair.findOne({exchange:req.params.exchange,pair:req.params.pair});
+    var promise=Pair.findOne({exchange:req.params.exchange,pair:req.params.pair}).exec();
     promise
            .then(function(pair){
             if(!pair) throw new Error('Pair not found');
@@ -160,7 +161,13 @@ function updatePairs(req,res){
 }
 
 function setTopReport(req,res){
-    sendJsonResponse(res,200,{'message':'it is stub'});
+   var promise=Report.create(req.body);
+   promise
+          .then(function(rep){
+            sendJsonResponse(res,200,rep);
+          })
+          .catch(function(err){sendJsonResponse(res,400,{'message':err.message})});
+   
 }
 
 function delPair(req,res){

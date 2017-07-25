@@ -1,5 +1,6 @@
 var express=require('express');
 var router=express.Router();
+var bodyParser = require('body-parser')
 
 var ctrlData=require('../controllers/ctrlData');
 var ctrlAuth=require('../controllers/ctrlAuth');
@@ -19,7 +20,7 @@ router.post('/private/coins',ctrlData.setNewCoin);
 router.post('/private/pairs',ctrlData.setNewPair);
 router.put('/private/coins/:cointag',ctrlData.updateCoins);
 router.put('/private/pairs/:exchange/:pair',ctrlData.updatePairs);
-router.post('/private/reports/top',ctrlData.setTopReport);
+router.post('/private/reports/top',bodyParser.json({reviver: 'reviveDates'}),ctrlData.setTopReport);
 router.delete('/private/pairs/:exchange/:pair',ctrlData.delPair);
 router.get('/private/state/:exchange',ctrlStates.getState);
 //router.post('/private/state/:exchange'.ctrlStates.setState);
