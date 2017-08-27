@@ -14,8 +14,7 @@ var dataFuncs=(function(){
         for (i in req.body) {
             if (i=='_id' || i=='_v') continue;  //Protection
             if (i in doc.schema.paths){
-                if (i=='exchanges'){doc[i]=req.body[i].split(',')} //Stub!!!
-                else {doc[i]=req.body[i]}
+                doc[i]=req.body[i];
                 cnt++;
             }
         }
@@ -24,8 +23,26 @@ var dataFuncs=(function(){
                     }
          else {return false;}
     }
+    function getDate(dateString,res){
+      if (!dateString) {var tempDate=new Date();}
+   else {
+    try{
+    var tempDate=new Date(dateString);
+    if (isNaN(tempDate.getDay())) throw new Error('Invalid Date');
+
+  }
+    catch(err){
+      sendJsonResponse(res,400,{'message':err.message});
+    }
+
+  }
+  var date = new Date (tempDate.toDateString());
+  return date;
+    }
+
     return {
-        updateObject:updateObject
+        updateObject:updateObject,
+        getDate:getDate
     };
 })();
 
@@ -60,7 +77,7 @@ function getPairs(req,res){
     //All possibly requests
 	var mongoReq=[{exchange:req.params.exchange,quoteCoin:req.params.cointag},
                   {exchange:req.params.exchange},
-                  {baseCoin:req.params.cointag},
+                  {quoteCoin:req.params.cointag},
                   {}
              ];
     var reqParam;
@@ -87,18 +104,25 @@ function getPairs(req,res){
 
 
 function getTopPairs(req,res){
-	sendJsonResponse(res,200,{'message':'it is stub'});
+  var date=dataFuncs.getDate(req.query.date,res);
+  var promise=Report.findOne({type:req.params.type,date:{'$gte':date}}).exec();
+  promise
+        .then(function(report){
+          if(!report) throw new Error('Report not found');
+          sendJsonResponse(res,200,report);
+        })
+        .catch(function(err){sendJsonResponse(res,400,{'message':err.message});});
 }
 
 function setNewCoin(req,res){
 	Coin.create({
         name:req.body.name,
         tag:req.body.tag,
-        exchanges:req.body.exchanges.split(','),
         rating:req.body.rating,
         tagImg:req.body.tagImg,
         coinDesc:req.body.coinDesc,
-        coinType:req.body.coinType
+        coinType:req.body.coinType,
+        miningAlgo:req.body.miningAlgo
     },function (err,coin){
         if (err) {
             sendJsonResponse(res,400,err);
@@ -110,7 +134,7 @@ function setNewCoin(req,res){
 }
 
 function setNewPair(req,res){
-    promise=Pair.create({
+    var promise=Pair.create({
         pair:req.body.pair,
         quoteCoin:req.body.quoteCoin,
         baseCoin:req.body.baseCoin,
@@ -149,6 +173,7 @@ function updatePairs(req,res){
     var promise=Pair.findOne({exchange:req.params.exchange,pair:req.params.pair}).exec();
     promise
            .then(function(pair){
+            console.log(req.body);
             if(!pair) throw new Error('Pair not found');
             pair=dataFuncs.updateObject(req,pair);
             if(!pair) throw new Error('Nothing to update');

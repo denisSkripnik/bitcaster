@@ -14,7 +14,8 @@ var pairsListSchema=new mongoose.Schema({
 	percentChange:{type:Number},
 	ema:{type:Number},
 	isForMedian:{type:Boolean,'default':false},
-	barTime:{type:Date}
+	barTime:{type:Date},
+	lastUpdate:{type:Date,'default':Date.now}
 	});
 
 pairsListSchema.plugin(numSeq1,{inc_field:'faw_short_num'});
