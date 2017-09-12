@@ -1,3 +1,4 @@
+var path = require('path');
 
 var ru_page={
 			lang:'ru',
@@ -68,5 +69,9 @@ function leading(req, res, next) {
   res.render('leading', get_lang_content(req))
   }
 
+function demo(req,res,next){
+	res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
+}
 
 module.exports.leading=leading;
+module.exports.demo=demo;
