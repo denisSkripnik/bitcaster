@@ -11,6 +11,7 @@ var api=require('./app_api/routers/index');
 
 var app = express();
 
+global.appRoot = path.resolve(__dirname);
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server','views'));
 app.set('view engine', 'jade');

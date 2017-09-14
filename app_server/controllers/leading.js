@@ -65,12 +65,11 @@ function get_lang_content(req){
 
 
 function leading(req, res, next) {
-
-  res.render('leading', get_lang_content(req))
+  res.render('leading', get_lang_content(req));
   }
 
 function demo(req,res,next){
-	res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
+	res.sendFile(path.join(appRoot, 'app_client', 'client.html'));
 }
 
 module.exports.leading=leading;
